@@ -1,15 +1,26 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { NavLink, useLocation, useHistory } from "react-router-dom";
+import { useSelector } from "react-redux";
+import handleCart from "../redux/reducer/handleCart";
 
-const Navbar = () => {
+const Navbar = ({ authenticated }) => {
+	const state = useSelector((state) => state.handleCart);
+	//let authenticated = localStorage.getItem("auth-token");
+	let history = useHistory();
+	const handleLogout = () => {
+		localStorage.removeItem("auth-token");
+		history.push("/login");
+	};
+
 	return (
 		<div>
-			<nav class="navbar navbar-expand-lg navbar-light bg-white py-3">
-				<div class="container">
-					<a class="navbar-brand fw-bold fs-4" href="#">
+			<nav className="navbar navbar-expand-lg navbar-light bg-white py-3">
+				<div className="container">
+					<NavLink className="navbar-brand fw-bold fs-4" to="/">
 						E-Store
-					</a>
+					</NavLink>
 					<button
-						class="navbar-toggler"
+						className="navbar-toggler"
 						type="button"
 						data-bs-toggle="collapse"
 						data-bs-target="#navbarSupportedContent"
@@ -17,44 +28,68 @@ const Navbar = () => {
 						aria-expanded="false"
 						aria-label="Toggle navigation"
 					>
-						<span class="navbar-toggler-icon"></span>
+						<span className="navbar-toggler-icon"></span>
 					</button>
-					<div class="collapse navbar-collapse" id="navbarSupportedContent">
-						<ul class="navbar-nav mx-auto mb-2 mb-lg-0">
-							<li class="nav-item">
-								<a class="nav-link active" aria-current="page" href="#">
+					<div className="collapse navbar-collapse" id="navbarSupportedContent">
+						<ul className="navbar-nav mx-auto mb-2 mb-lg-0">
+							<li className="nav-item">
+								<NavLink
+									className="nav-link active"
+									aria-current="page"
+									to="/home"
+								>
 									Home
-								</a>
+								</NavLink>
 							</li>
-							<li class="nav-item">
-								<a class="nav-link" href="#">
-									Link
-								</a>
-							</li>
-							<li class="nav-item">
-								<a class="nav-link" href="#">
+							<li className="nav-item">
+								<NavLink className="nav-link" to="/products">
 									Products
-								</a>
-							</li>
-							<li class="nav-item">
-								<a class="nav-link" href="#">
-									Contact
-								</a>
+								</NavLink>
 							</li>
 						</ul>
 						<div className="buttons">
-							<a href="" className="btn btn-outline-dark">
-								<i className="fa fa-sign-in me-1"></i>
-								Login
-							</a>
-							<a href="" className="btn btn-outline-dark ms-2">
-								<i className="fa fa-user-plus me-1"></i>
-								Register
-							</a>
-							<a href="" className="btn btn-outline-dark ms-2">
-								<i className="fa fa-shopping-cart me-1"></i>
-								Cart (0)
-							</a>
+							{authenticated ? (
+								<form className="d-flex">
+									<button onClick={handleLogout} className="btn btn-primary">
+										Logout
+									</button>
+									<NavLink
+										role="button"
+										to="/cart"
+										className="btn btn-outline-dark ms-2"
+									>
+										<i className="fa fa-shopping-cart me-1"></i>
+										Cart ({state.length})
+									</NavLink>
+									{/* <NavLink
+										role="button"
+										to="/cart"
+										className="btn btn-outline-dark ms-2"
+									>
+										<i className="fa fa-shopping-cart me-1"></i>
+										Cart (0)
+									</NavLink> */}
+								</form>
+							) : (
+								<form action="" className="d-flex">
+									<NavLink
+										role="button"
+										to="/"
+										className="btn btn-outline-dark"
+									>
+										<i className="fa fa-sign-in me-1"></i>
+										Login
+									</NavLink>
+									<NavLink
+										role="button"
+										to="/register"
+										className="btn btn-outline-dark ms-2"
+									>
+										<i className="fa fa-user-plus me-1"></i>
+										Register
+									</NavLink>
+								</form>
+							)}
 						</div>
 					</div>
 				</div>
