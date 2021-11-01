@@ -3,13 +3,13 @@ import Products from "./Products";
 import { useHistory } from "react-router";
 
 const Home = () => {
-	let history = useHistory();
+	// let history = useHistory();
 
-	useEffect(() => {
-		if (!localStorage.getItem("auth-token")) {
-			history.push("/");
-		}
-	}, []);
+	// useEffect(() => {
+	// 	if (!localStorage.getItem("auth-token")) {
+	// 		history.push("/");
+	// 	}
+	// }, []);
 
 	return (
 		<div className="hero">

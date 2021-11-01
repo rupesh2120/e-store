@@ -14,10 +14,9 @@ function App() {
 		<div>
 			<Navbar authenticated={authenticated} />
 			<Switch>
-				<Route exact path="/" component={Login} />
 				<Route exact path="/login" component={Login} />
 				<Route exact path="/register" component={Registration} />
-				<Route exact path="/home" component={Home} />
+				<Route exact path="/" component={Home} />
 				<Route exact path="/products" component={Products} />
 				<Route exact path="/products/:id" component={Product} />
 				<Route exact path="/cart" component={Cart} />

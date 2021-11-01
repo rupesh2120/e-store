@@ -11,18 +11,18 @@ const Products = () => {
 	const [loading, setLoading] = useState(false);
 	let componentMounted = true;
 
-	let history = useHistory();
+	//let history = useHistory();
+
+	// useEffect(() => {
+	// 	if (!localStorage.getItem("auth-token")) {
+	// 		history.push("/");
+	// 	}
+	// }, []);
 
 	useEffect(() => {
-		if (!localStorage.getItem("auth-token")) {
-			history.push("/");
-		}
-	}, []);
-
-	useEffect(() => {
-		if (!localStorage.getItem("auth-token")) {
-			history.push("/");
-		}
+		// if (!localStorage.getItem("auth-token")) {
+		// 	history.push("/");
+		// }
 		const getProducts = async () => {
 			setLoading(true);
 			const response = await fetch("https://fakestoreapi.com/products");

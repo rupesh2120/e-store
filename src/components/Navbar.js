@@ -33,11 +33,7 @@ const Navbar = ({ authenticated }) => {
 					<div className="collapse navbar-collapse" id="navbarSupportedContent">
 						<ul className="navbar-nav mx-auto mb-2 mb-lg-0">
 							<li className="nav-item">
-								<NavLink
-									className="nav-link active"
-									aria-current="page"
-									to="/home"
-								>
+								<NavLink className="nav-link active" aria-current="page" to="/">
 									Home
 								</NavLink>
 							</li>
@@ -74,7 +70,7 @@ const Navbar = ({ authenticated }) => {
 								<form action="" className="d-flex">
 									<NavLink
 										role="button"
-										to="/"
+										to="/login"
 										className="btn btn-outline-dark"
 									>
 										<i className="fa fa-sign-in me-1"></i>

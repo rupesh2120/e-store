@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { addCart, delCart } from "../redux/action";
+import { addCart, delCart, delALL } from "../redux/action";
 import GooglePayButton from "@google-pay/button-react";
 import { useHistory } from "react-router";
 
@@ -14,12 +14,12 @@ const Cart = () => {
 	);
 	const [loading, setLoading] = useState(false);
 
-	let history = useHistory();
+	//let history = useHistory();
 
 	useEffect(() => {
-		if (!localStorage.getItem("auth-token")) {
-			history.push("/");
-		}
+		// if (!localStorage.getItem("auth-token")) {
+		// 	history.push("/");
+		// }
 		const total = state.reduce((prev, cur) => {
 			return prev + cur.price;
 		}, 0);
@@ -39,6 +39,13 @@ const Cart = () => {
 		result -= product.price;
 		setTotal(result);
 		dispatch(delCart(product));
+	};
+
+	const deleteAll = (product) => {
+		let result = total;
+		result -= product.total;
+		setTotal(result);
+		dispatch(delALL(product));
 	};
 
 	const ShowTotal = () => {
@@ -108,6 +115,7 @@ const Cart = () => {
 						</p>
 						<button
 							className="btn btn-outline-dark me-4"
+							disabled={product.qty === 1}
 							onClick={() => delProduct(product)}
 						>
 							<i className="fa fa-minus"></i>
@@ -117,6 +125,12 @@ const Cart = () => {
 							onClick={() => addProduct(product)}
 						>
 							<i className="fa fa-plus"></i>
+						</button>
+						<button
+							className="btn btn-outline-dark me-4"
+							onClick={() => deleteAll(product)}
+						>
+							<i className="fa fa-trash"></i>
 						</button>
 					</div>
 				</div>

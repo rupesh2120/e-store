@@ -20,7 +20,7 @@ const Login = () => {
 			return alert("Fill correct credentials");
 		} else if (passwordlog == pass || emaillog == mail) {
 			localStorage.setItem("auth-token", true);
-			history.push("/home");
+			history.push("/");
 		} else {
 			return alert("Fill correct credentials");
 		}

@@ -37,6 +37,13 @@ const handleCart = (state = cart, action) => {
 			}
 			break;
 
+		case "DELALL":
+			const exist2 = state.find((x) => x.id === product.id);
+			if (exist2) {
+				return state.filter((x) => x.id !== exist2.id);
+			}
+			break;
+
 		default:
 			return state;
 			break;
